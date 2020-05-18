@@ -1,0 +1,155 @@
+<div class="container" >
+    <form #addForm ="ngForm" (ngSubmit)="addForm.valid && addOrder(addForm)">
+        <div class="form-group">
+            <label>Order Name</label>
+            <table>
+                <tr><td><input type="text" class="form-control" name="name" ngModel #nameCtrl=ngModel required
+                    pattern="[a-zA-Z][a-zA-Z ]+" minlength="2"></td>
+                    <td>
+            <div *ngIf="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)" class="myerror">
+                <div *ngIf="nameCtrl.invalid == true">
+                    <div *ngIf="nameCtrl.errors.required">
+                        Name is required.
+                    </div>
+                    <div *ngIf="nameCtrl.errors.pattern">
+                        not a valid name.
+                    </div>
+                </div>
+            </div>
+                    </td>
+                </tr>
+            </table>
+         
+        </div>
+        <div class="form-group">
+            <label>Supplier id</label>
+                <table>
+                    <tr>
+                        <td> <input type="text" class="form-control" name="sid" ngModel #sidCtrl=ngModel required minlength="2"></td>  
+                    <td>
+                    <div *ngIf="sidCtrl.invalid && (sidCtrl.dirty || sidCtrl.touched)" class="myerror">
+                        <div *ngIf="sidCtrl.invalid == true">
+                            <div *ngIf="sidCtrl.errors.required">
+                                SupplierId is required.
+                            </div>
+                            <div *ngIf="sidCtrl.errors.minlength">
+                                not a valid SupplierId.
+                            </div>
+                        </div>
+                    </div>
+                 </td>
+            </tr>
+                </table>
+        </div>
+        <div class="form-group">
+            <label>warehouse id</label>
+            <table>
+                <tr>
+                    <td>
+                        <input type="text" class="form-control" name="wid" ngModel #widCtrl=ngModel required minlength="2">
+                    </td>
+                    <td>
+                        <div *ngIf="widCtrl.invalid && (widCtrl.dirty || widCtrl.touched)" class="myerror">
+                            <div *ngIf="widCtrl.invalid == true">
+                                <div *ngIf="widCtrl.errors.required">
+                                 Id is required.
+                                </div>
+                            <div *ngIf ="widCtrl.errors.minlength">
+                                 Min length should be 2
+                             </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-group">
+            <label>Price per unit</label>
+            <table><tr><td>
+            <input type="number" class="form-control" name="price_unit" ngModel #price_unitCtrl=ngModel required>
+            </td>
+            <td>
+            <div *ngIf="price_unitCtrl.invalid && (price_unitCtrl.dirty || price_unitCtrl.touched)" class="myerror">
+                <div *ngIf="price_unitCtrl.invalid == true">
+                    <div *ngIf="price_unitCtrl.errors.required">
+                Price  is required
+            </div>
+        </div>
+            </div>
+            </td>
+            </tr>
+            </table>
+        </div>
+        <div class="form-group">
+            <label>Quantity Value</label>
+            <table>
+                <tr>
+                    <td>
+                        <input type="number" class="form-control" name="quantityValue" ngModel #quantityValueCtrl=ngModel required>
+                    </td>
+                    <td>
+                        <div *ngIf="quantityValueCtrl.invalid && (quantityValueCtrl.dirty || quantityValueCtrl.touched)" class="myerror">
+                            <div *ngIf="quantityValueCtrl.invalid == true">
+                                <div *ngIf="quantityValueCtrl.errors.required">
+                            quantityValue  is required
+                        </div>
+                    </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-group">
+            <label>Quantity Unit</label>
+            <table>
+                <tr>
+                    <td>
+                        <input type="number" class="form-control" name="quantityUnit" ngModel #quantityUnitCtrl=ngModel required>
+                    </td>
+                    <td>
+                        <div *ngIf="quantityUnitCtrl.invalid && (quantityUnitCtrl.dirty || quantityUnitCtrl.touched)" class="myerror">
+                            <div *ngIf="quantityUnitCtrl.invalid == true">
+                                <div *ngIf="quantityUnitCtrl.errors.required">
+                            quantityUnit  is required
+                        </div>
+                    </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-group">
+            <label>date Of Delivery</label>
+            <table>
+                <tr>
+                    <td><input id="deliveryDate" type="date" class="form-control" name="deliveryDate" ngModel #deliveryCtrl=ngModel  placeholder="dd-MM-yyyy" required /> </td>
+                <td>
+                    <div *ngIf="deliveryCtrl.invalid && (deliveryCtrl.dirty || deliveryCtrl.touched)" class="myerror">
+                        <div *ngIf="deliveryCtrl.invalid == true">
+                            <div *ngIf="deliveryCtrl.errors.required">
+                                delivery Date  is required
+                    </div>
+                </div>
+                    </div>
+                </td>
+            </table>
+              
+         
+        </div>
+        
+    
+         <button class="btn btn-lg btn-primary" type="submit">Place Order</button>
+    </form>
+    </div>
+
+<div *ngIf="orderCreated==true">
+    <h4>Order Placed SuccessFully </h4>
+     Details:
+        OrderId: {{order.orderId}}
+</div>  
+
+<div *ngIf="errorMsg!=null">
+    <h4>not ordered </h4>
+     Details:
+        {{errorMsg}}
+</div> 
